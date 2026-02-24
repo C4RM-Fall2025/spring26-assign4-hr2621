@@ -11,7 +11,7 @@ def getBondDuration(y, face, couponRate, m, ppy = 1):
     while t <= n:
 
         cf = c
-        if t == len(yc):
+        if t == n:
             cf = cf + face
 
         pv = cf / ((1 + r) ** t)
