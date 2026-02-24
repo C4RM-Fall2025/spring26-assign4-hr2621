@@ -1,15 +1,25 @@
-def getBondPrice_E(face, couponRate, yc):
+def getBondDuration(y, face, couponRate, m, ppy = 1):
 
-    bondPrice = 0
-    c = face * couponRate
+    n = int(m * ppy)
+    r = y / ppy
+    c = face * couponRate / ppy
 
-    for t, rate in enumerate(yc, start=1):
+    pv_sum = 0
+    tpv_sum = 0
+
+    t = 1
+    while t <= n:
 
         cf = c
-        if t == len(yc):
+        if t == n:
             cf = cf + face
 
-        pv = cf / ((1 + rate) ** t)
-        bondPrice = bondPrice + pv
+        pv = cf / ((1 + r) ** t)
 
-    return(bondPrice)
+        pv_sum = pv_sum + pv
+        tpv_sum = tpv_sum + (t / ppy) * pv
+
+        t = t + 1
+
+    bondDuration = tpv_sum / pv_sum
+    return(bondDuration)
